@@ -1,0 +1,5 @@
+{
+    "dependencies": {
+		"@cosmos-js/wgpu-gcab": "^1.0.0"
+	}
+}

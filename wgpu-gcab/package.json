@@ -1,0 +1,23 @@
+{
+  "name": "@cosmos-js/wgpu-gcab",
+  "version": "1.0.0",
+  "description": "GPU Connected Array Buffer",
+  "main": "./dist/index.js",
+  "keywords": ["webgpu","graphics","arraybuffer","gpu","array"],
+  "author": {"name": "Kryft Studios","email": "AfriaStudios@outlook.in","url": "https://github.com/Kryft-Studios"},
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.7.0",
+      "onFail": "download"
+    }
+  },
+  "type": "module",
+  "repository": {
+    "url": "https://github.com/Kryft-Studios"
+  }
+}

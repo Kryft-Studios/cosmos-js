@@ -1,0 +1,25 @@
+{
+  "name": "@cosmos-js/wgpu-struct",
+  "version": "0.1.0",
+  "description": "Helper for cosmos-js to descriptor wgpu structs in js.",
+  "main": "./dist/index.js",
+  "author": {
+    "name": "Kryft Studios",
+    "url": "https://github.com/KryftStudios",
+    "email": "AfriaStudios@outlook.in"
+  },
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "webgpu",
+    "struct",
+    "gpu",
+    "cpu"
+  ],
+  "type": "module",
+  "repository": {
+    "url": "https://github.com/Kryft-Studios"
+  }
+}

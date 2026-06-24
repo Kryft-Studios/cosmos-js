@@ -1,0 +1,22 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@cosmos-js/wgpu-gcab':
+        specifier: ^1.0.0
+        version: 1.0.0
+
+packages:
+
+  '@cosmos-js/wgpu-gcab@1.0.0':
+    resolution: {integrity: sha512-qOscPyylTnGLkOdjtWXgzkzQWYgGZ5aDdmev/JmZ/yQO1+6bwvdvKyHfGJAytEL3ODArXIn4GOsoRCMiT/OMdg==}
+
+snapshots:
+
+  '@cosmos-js/wgpu-gcab@1.0.0': {}
