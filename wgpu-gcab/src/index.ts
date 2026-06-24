@@ -8,10 +8,6 @@ export interface GCAB_DESCRIPTOR {
     /** Max gap between batches. */
     maxGap?: number;
 }
-type Value =
-    | { type: "u8"; value: number }
-    | { type: "u16"; value: number }
-    | { type: "u32"; value: number };
 type CHANGES = Record<number, true>
 interface CHANGES_BATCH {
     from: number,
@@ -121,36 +117,5 @@ export class GCAB {
             new Uint8Array(this.ab).set(new Uint8Array(this.buffer.getMappedRange()));
             this.buffer.unmap();
         }
-    }
-    static packToU32Array(values: Value[]): number[] {
-        const out: number[] = [];
-
-        let current = 0;
-        let offset = 0;
-
-        function flush() {
-            out.push(current >>> 0);
-            current = 0;
-            offset = 0;
-        }
-
-        for (const v of values) {
-            let size = v.type === "u8" ? 8 : v.type === "u16" ? 16 : 32;
-
-            if (v.type === "u32") {
-                if (offset !== 0) flush();
-                out.push(v.value >>> 0);
-                continue;
-            }
-
-            if (offset + size > 32) flush();
-
-            current |= (v.value & ((1 << size) - 1)) << offset;
-            offset += size;
-        }
-
-        if (offset > 0) flush();
-
-        return out;
     }
 }

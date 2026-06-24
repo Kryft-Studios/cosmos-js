@@ -74,13 +74,12 @@ export interface DATA_TYPE {
 }
 export namespace StructValidation {
     export function validateNames(struct: WGPU_STRUCT) {
-        let set: Record<string, true> = {};
+        const set: Record<string, true> = {};
         for (const field of struct) {
             if (set[field.name]) throw new Error("Duplicate field name " + field.name)
             else if ((field as { name: string } & { innerStruct: WGPU_STRUCT })?.innerStruct) validateNames((field as { name: string } & { innerStruct: WGPU_STRUCT }).innerStruct)
             set[field.name] = true;
         }
-        set = {}
     }
     function getByteLength(struct: WGPU_STRUCT) {
         let bytes = 0;
@@ -205,7 +204,7 @@ export namespace Packer {
         for (let i = 0; i < total32BitChunks; i++) {
             const currentByteOffset = i * 4;
             const targetType = chunkTypes[i];
-            let value = 0;
+            let value;
 
             if (targetType === "f32") {
                 value = view.getFloat32(currentByteOffset, true);
