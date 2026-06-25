@@ -148,17 +148,17 @@ export namespace Packer {
     export function packToBit32(data: DATA_TYPE, layout: DIGESTABLE_STRUCT_LAYOUT) {
         const buffer = new ArrayBuffer(layout.byteLength);
         const view = new DataView(buffer);
-        
+
         const chunkTypes: ("f32" | "i32" | "u32")[] = new Array(layout.byteLength / 4).fill("u32");
-        
+
         let byteOffset = 0;
 
         function writeField(fieldData: number[] | DATA_TYPE[], field: DIGESTABLE_FIELD) {
             const isPrimitive = "type" in field;
 
             if (isPrimitive) {
-                const primitiveType = field.type.type; 
-                const bitLength = field.type.length; 
+                const primitiveType = field.type.type;
+                const bitLength = field.type.length;
                 const numericArray = fieldData as number[];
 
                 for (let i = 0; i < field.length; i++) {
@@ -188,7 +188,7 @@ export namespace Packer {
                 for (let i = 0; i < field.length; i++) {
                     const innerData = structArray[i] ?? {};
                     for (const innerField of innerLayout.items) {
-                        writeField(innerData[innerField.name], innerField);
+                        writeField(innerData[innerField.name] ?? Array(innerField.length).fill(0), innerField);
                     }
                 }
             }
@@ -218,5 +218,58 @@ export namespace Packer {
         }
 
         return result;
+    }
+}
+export namespace StructReader {
+    export function getDataFromLayout(
+        arrayBuffer: ArrayBuffer, 
+        layout: DIGESTABLE_STRUCT_LAYOUT, 
+        byteOffsetRef: { current: number } = { current: 0 }
+    ): DATA_TYPE {
+        const returnval: DATA_TYPE = {};
+        const view = new DataView(arrayBuffer);
+
+        for (const field of layout.items) {
+            const isPrimitive = "type" in field;
+
+            if (isPrimitive) {
+                const primitiveType = field.type.type; // "float" | "int" | "uint"
+                const bitLength = field.type.length;   // 1 | 2 | 4 bytes
+                const numericArray: number[] = [];
+
+                for (let i = 0; i < field.length; i++) {
+                    let value = 0;
+
+                    if (primitiveType === "uint") {
+                        if (bitLength === 1) value = view.getUint8(byteOffsetRef.current);
+                        else if (bitLength === 2) value = view.getUint16(byteOffsetRef.current, true);
+                        else if (bitLength === 4) value = view.getUint32(byteOffsetRef.current, true);
+                    } else if (primitiveType === "int") {
+                        if (bitLength === 1) value = view.getInt8(byteOffsetRef.current);
+                        else if (bitLength === 2) value = view.getInt16(byteOffsetRef.current, true);
+                        else if (bitLength === 4) value = view.getInt32(byteOffsetRef.current, true);
+                    } else if (primitiveType === "float") {
+                        if (bitLength === 4) value = view.getFloat32(byteOffsetRef.current, true);
+                    }
+
+                    numericArray.push(value);
+                    byteOffsetRef.current += bitLength;
+                }
+
+                returnval[field.name] = numericArray;
+            } else {
+                const structArray: DATA_TYPE[] = [];
+                const innerLayout = field.struct;
+
+                for (let i = 0; i < field.length; i++) {
+                    const innerData = getDataFromLayout(arrayBuffer, innerLayout, byteOffsetRef);
+                    structArray.push(innerData as DATA_TYPE);
+                }
+
+                returnval[field.name] = structArray;
+            }
+        }
+
+        return returnval;
     }
 }

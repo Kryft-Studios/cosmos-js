@@ -17,6 +17,7 @@ export default defineConfig([
     files: ["**/*.ts"],
     rules: {
       "@typescript-eslint/no-namespace": "off",
+      "@typescript-eslint/no-useless-vars": "warn",
       "@typescript-eslint/naming-convention": [
         "error",
 
