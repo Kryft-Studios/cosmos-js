@@ -48,7 +48,7 @@ export class SlotArray<FLAGS extends SA_CONFIG> extends Array {
                 if (!isNaN(numProperty)) {
                     return self.actualArray[numProperty]
                 }
-                return Reflect.get(target, property, reciever);
+                return self.actualArray[property as any];
             },
             set(target, property, value, reciever) {
                 const numProperty = Number(property);
@@ -81,7 +81,15 @@ export class SlotArray<FLAGS extends SA_CONFIG> extends Array {
                     }
                 }
                 return true;
-            }
+            },
+            "deleteProperty"(target,property){
+                if(Number(property) === (self.actualArray.length-1)){
+                    self.currByteLength -= self.layout.byteLength;
+                    self.gcab.int32.set(Array(self.layout.byteLength).fill(0),self.currByteLength);
+                    return true
+                }
+                else throw new Error("Cannot delete a property in SlotArray.");
+            },
         })
     };
     /**
