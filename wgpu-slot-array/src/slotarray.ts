@@ -48,7 +48,7 @@ export class SlotArray<FLAGS extends SA_CONFIG> extends Array {
                 if (!isNaN(numProperty)) {
                     return self.actualArray[numProperty]
                 }
-                return self.actualArray[property as any];
+                return Reflect.get(target,property,reciever);
             },
             set(target, property, value, reciever) {
                 const numProperty = Number(property);
