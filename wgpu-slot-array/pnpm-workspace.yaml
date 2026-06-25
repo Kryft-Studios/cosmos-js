@@ -1,2 +1,4 @@
 minimumReleaseAgeExclude:
   - '@cosmos-js/wgpu-gcab@1.0.0'
+  - '@cosmos-js/wgpu-struct@0.1.0'
+  - '@cosmos-js/wgpu-struct@0.1.1'

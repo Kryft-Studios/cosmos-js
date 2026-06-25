@@ -1,5 +1,22 @@
 {
+    "name":"@cosmos-js/wgpu-slot-array",
+    "version": "0.1.0",
+    "description": "Slot Array: CPU Array which matches 1:1 the GPU Array.",
+    "author": {
+        "name": "Kryft Studios",
+        "email": "AfriaStudios@outlook.in",
+        "url": "https://github.com/Kryft-Studios/cosmos-js"
+    },
+    "keywords": ["webgpu","array","cpu","gpu","helper"],
+    "peerDependencies": {
+        "@cosmos-js/wgpu-gcab": "latest"
+    },
+    "license":"Apache-2.0",
+    "publishConfig": {
+        "access": "public"
+    },
     "dependencies": {
-		"@cosmos-js/wgpu-gcab": "^1.0.0"
-	}
+        "@cosmos-js/wgpu-gcab": "^1.0.0",
+        "@cosmos-js/wgpu-struct": "^0.2.3"
+    }
 }
