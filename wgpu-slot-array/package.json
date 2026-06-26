@@ -11,6 +11,7 @@
     "peerDependencies": {
         "@cosmos-js/wgpu-gcab": "latest"
     },
+    "main": "./dist/index.js",
     "license":"Apache-2.0",
     "publishConfig": {
         "access": "public"

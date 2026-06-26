@@ -7,6 +7,13 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@cosmos-js/wgpu-gcab':
+        specifier: ^1.0.0
+        version: 1.0.0
+      '@cosmos-js/wgpu-struct':
+        specifier: ^0.2.3
+        version: 0.2.3
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
@@ -37,6 +44,12 @@ importers:
         version: 8.62.0(eslint@10.5.0(jiti@2.7.0))(typescript@6.0.3)
 
 packages:
+
+  '@cosmos-js/wgpu-gcab@1.0.0':
+    resolution: {integrity: sha512-qOscPyylTnGLkOdjtWXgzkzQWYgGZ5aDdmev/JmZ/yQO1+6bwvdvKyHfGJAytEL3ODArXIn4GOsoRCMiT/OMdg==}
+
+  '@cosmos-js/wgpu-struct@0.2.3':
+    resolution: {integrity: sha512-DULVqyih43Mk4uVmn7eWHZrSh7NuLx1e1IdcDpuvcmvnCkmzMU2k9Ot/7EQHuw8eOraUvxCQXwHpTNv3d3auyA==}
 
   '@eslint-community/eslint-utils@4.9.1':
     resolution: {integrity: sha512-phrYmNiYppR7znFEdqgfWHXR6NCkZEK7hwWDHZUjit/2/U0r6XvkDl0SYnoM51Hq7FhCGdLDT6zxCCOY1hexsQ==}
@@ -437,6 +450,10 @@ packages:
     engines: {node: '>=10'}
 
 snapshots:
+
+  '@cosmos-js/wgpu-gcab@1.0.0': {}
+
+  '@cosmos-js/wgpu-struct@0.2.3': {}
 
   '@eslint-community/eslint-utils@4.9.1(eslint@10.5.0(jiti@2.7.0))':
     dependencies:

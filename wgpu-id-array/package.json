@@ -1,0 +1,6 @@
+{
+    "dependencies": {
+        "@cosmos-js/wgpu-struct":"latest",
+        "@cosmos-js/wgpu-gcab":"latest"
+    }
+}
