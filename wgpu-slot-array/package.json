@@ -1,6 +1,6 @@
 {
     "name":"@cosmos-js/wgpu-slot-array",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "Slot Array: CPU Array which matches 1:1 the GPU Array.",
     "author": {
         "name": "Kryft Studios",

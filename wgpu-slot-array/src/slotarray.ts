@@ -30,7 +30,7 @@ export class SlotArray<FLAGS extends SA_CONFIG> extends Array {
     gcab;
     actualArray:DATA_TYPE[] = [];
     currByteLength = 0;
-    config;
+    config:FLAGS;
     constructor(device: GPUDevice, flags: FLAGS) {
         // validation
         StructValidation.validateNames(flags.struct);
@@ -47,6 +47,12 @@ export class SlotArray<FLAGS extends SA_CONFIG> extends Array {
                 const numProperty = Number(property)
                 if (!isNaN(numProperty)) {
                     return self.actualArray[numProperty]
+                }
+                if(property==="length"){
+                    return self.actualArray.length;
+                }
+                if (property==="unshift"){
+                    throw new Error("@cosmos-js/wgpu-slot-array: Cannot access SlotArray.unshift - cannot unshift in slotarrays.");
                 }
                 return Reflect.get(target,property,reciever);
             },
