@@ -1,6 +1,23 @@
 {
+    "name": "@cosmos-js/wgpu-id-array",
+    "version": "0.1.0",
+    "description": "WebGPU ID Array: Arrays in WebGPU!",
+    "author": {
+        "name": "Kryft Studios",
+        "email": "AfriaStudios@outlook.in",
+        "url": "https://github.com/Kryft-Studios"
+    },
+    "keywords": ["webgpu","array","cpu","gpu","helper"],
+    "peerDependencies": {
+        "@cosmos-js/wgpu-gcab": "latest"
+    },
+    "main": "./dist/index.js",
+    "license":"Apache-2.0",
+    "publishConfig": {
+        "access": "public"
+    },
     "dependencies": {
-        "@cosmos-js/wgpu-struct":"latest",
-        "@cosmos-js/wgpu-gcab":"latest"
+        "@cosmos-js/wgpu-gcab": "latest",
+        "@cosmos-js/wgpu-struct": "latest"
     }
 }
