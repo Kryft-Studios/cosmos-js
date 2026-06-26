@@ -39,7 +39,7 @@ export class IDArray extends Array {
     idMap = new Map<number,{gpuIndex:number,value: DATA_TYPE}>();
     gpuToIdMap = new Map<number,number>();
     // gpu highest index
-    highestIndPointer = 0;
+    highestIndPointer = -1;
     z_getind(index:number){
         return this.layout.byteLength*index;
     }
@@ -83,8 +83,8 @@ export class IDArray extends Array {
     }
     z_clear(index:number){
         const gpuIndex = this.z_getind(this.idMap.get(index)?.gpuIndex as number);
-        if(!gpuIndex)return;
-        for(let i=0;i<=this.layout.byteLength/4;i++){
+        if(gpuIndex==null)return;
+        for(let i=0;i<this.layout.byteLength/4;i++){
             this.gcab.setU32(gpuIndex+(i*4),0);
         }
     }
@@ -93,6 +93,7 @@ export class IDArray extends Array {
         const fromI =this.gpuToIdMap.get(this.highestIndPointer) as number;
         this.z_clear(fromI);
         if(fromI === toi){
+            // clear this slot
             this.z_clear(fromI);
             this.idMap.delete(fromI);
             this.gpuToIdMap.delete(this.highestIndPointer);
@@ -108,11 +109,11 @@ export class IDArray extends Array {
         this.z_write(gpuIndex, fromval);
 
         // now update its index
-        this.idMap.set(fromI, {gpuIndex,value: fromval});
-
+        this.idMap.set(fromI, {gpuIndex:gpuIndex/this.layout.byteLength,value: fromval});
+        this.gpuToIdMap.set(this.idMap.get(toi)?.gpuIndex as number, fromI);
         // delete the to element.
         this.idMap.delete(toi);
-        this.gpuToIdMap.delete(gpuIndex);
+        this.gpuToIdMap.delete(gpuIndex/this.layout.byteLength);
         this.highestIndPointer--;
     }
     z_growfn(){
@@ -136,7 +137,7 @@ export class IDArray extends Array {
         const spaceNeeded = this.config.shrinkStep + (this.config.minimumFreeSpace??0);
         const capacity = this.capacity;
         const capacityUsed = this.highestIndPointer;
-
+        
         if((capacity-capacityUsed)>=spaceNeeded){
             const boundaryDontShrinkAfter = this.highestIndPointer + (this.config.minimumFreeSpace??0)
             while(true){
