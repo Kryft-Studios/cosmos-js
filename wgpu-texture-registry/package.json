@@ -1,6 +1,6 @@
 {
     "name": "@cosmos-js/wgpu-texture-registry",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "WebGPU Texture Registry Helper.",
     "author": {
         "name": "Kryft Studios",
@@ -12,5 +12,8 @@
     },
     "main": "./dist/index.js",
     "keywords": ["texture","registry", "graphics", "wgpu", "webgpu"],
-    "license":"Apache-2.0"
+    "license":"Apache-2.0",
+    "publishConfig": {
+        "access": "public"
+    }
 }

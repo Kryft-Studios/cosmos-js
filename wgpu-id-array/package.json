@@ -1,6 +1,6 @@
 {
     "name": "@cosmos-js/wgpu-id-array",
-    "version": "0.1.1",
+    "version": "0.1.3",
     "description": "WebGPU ID Array: Arrays in WebGPU!",
     "author": {
         "name": "Kryft Studios",

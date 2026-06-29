@@ -1,6 +1,6 @@
 {
   "name": "@cosmos-js/wgpu-struct",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Helper for cosmos-js to descriptor wgpu structs in js.",
   "main": "./dist/index.js",
   "author": {
