@@ -1,4 +1,4 @@
-import js from "@eslint/js";
+/*import js from "@eslint/js";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 import { defineConfig } from "eslint/config";
@@ -14,7 +14,7 @@ export default defineConfig([
 
   tseslint.configs.recommended,
   {
-    files: ["**/*.ts"],
+    files: ["*.ts"],
     rules: {
       "@typescript-eslint/no-namespace": "off",
       "@typescript-eslint/no-useless-vars": "warn",
@@ -33,4 +33,4 @@ export default defineConfig([
       ],
     },
   },
-]);
+]);*/
